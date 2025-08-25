@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAMEDI - Liga Acadêmica de Medicina Interna | UNADES</title>
+    <meta name="description" content="LAMEDI - Formando estudantes comprometidos com a excelência acadêmica, humanismo e pesquisa clínica na medicina interna">
+    <meta name="keywords" content="liga acadêmica, medicina interna, UNADES, LAMEDI, formação médica, residência">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a8a;
+            --light-blue: #93c5fd;
+            --light-gray: #f8fafc;
+            --dark-gray: #64748b;
+            --white: #ffffff;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --font-family: 'Inter', sans-serif;
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --border-radius: 0.5rem;
+            --border-radius-lg: 0.75rem;
+            --border-radius-xl: 1rem;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        /* Header */
+        .header {
+            background: var(--white);
+            box-shadow: var(--shadow-md);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            padding: var(--spacing-sm) 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1;
+        }
+
+        .logo-subtitle {
+            font-size: var(--font-size-xs);
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-lg);
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: var(--font-size-sm);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-blue);
+            background: var(--light-gray);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: var(--spacing-xs);
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        /* Sections */
+        .section {
+            padding: var(--spacing-2xl) 0;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .section-header h2 {
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .section-header p {
+            font-size: var(--font-size-lg);
+            color: var(--text-light);
+        }
+
+        /* Hero Section */
+        #home.section {
+            padding: calc(80px + var(--spacing-xl)) 0 var(--spacing-2xl);
+            background: linear-gradient(135deg, var(--light-gray) 0%, var(--white) 100%);
+            display: block;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: var(--spacing-2xl);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-sm);
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: 50px;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-dark);
+        }
+
+        .hero-title .highlight {
+            color: var(--primary-blue);
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--text-light);
+            margin-bottom: var(--spacing-xl);
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: var(--font-size-3xl);
+            font-weight: 700;
+            color: var(--primary-blue);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-card {
+            background: var(--white);
+            border-radius: var(--border-radius-xl);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--light-gray);
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-card h3 {
+            color: var(--primary-blue);
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero-card p {
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-dark);
+        }
+
+        .hero-card strong {
+            color: var(--primary-blue);
+        }
+
+        .activity-tag {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+            padding: 4px var(--spacing-xs);
+            border-radius: 20px;
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: 12px 24px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--primary-blue);
+            color: var(--white);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+            border-color: #1e40af;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border-color: var(--primary-blue);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-whatsapp {
+            background: #25d366;
+            color: var(--white);
+            border-color: #25d366;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128c7e;
+            border-color: #128c7e;
+        }
+
+        /* Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        /* Cards */
+        .card {
+            background: var(--white);
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(30, 58, 138, 0.1);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+            display: block;
+        }
+
+        .card h3 {
+            font-size: var(--font-size-xl);
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Team Cards */
+        .team-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .team-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--light-blue);
+            margin: 0 auto var(--spacing-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            color: var(--primary-blue);
+            overflow: hidden;
+        }
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .team-card h4 {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .team-card p {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: var(--font-size-sm);
+        }
+
+        .placeholder {
+            background: var(--light-gray);
+            border: 2px dashed var(--dark-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: var(--font-size-sm);
+            font-style: italic;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: var(--spacing-xs);
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--light-gray);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-base);
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: var(--white);
+            border: 1px solid var(--light-gray);
+            border-radius: var(--border-radius-lg);
+            margin-bottom: var(--spacing-md);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: var(--spacing-md);
+            background: var(--light-gray);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .faq-question:hover {
+            background: #e2e8f0;
+        }
+
+        .faq-answer {
+            padding: 0 var(--spacing-md);
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: var(--spacing-md);
+            max-height: 200px;
+        }
+
+        .faq-toggle {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        /* Gallery Images */
+        .gallery-item {
+            position: relative;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: var(--spacing-md);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: var(--spacing-2xl) 0 var(--spacing-lg);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .footer-main {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .footer-logo .logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .footer-logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        .footer-subtitle {
+            font-size: var(--font-size-sm);
+            color: var(--light-blue);
+            font-weight: 500;
+        }
+
+        .footer-description {
+            color: #d1d5db;
+            line-height: 1.6;
+            max-width: 400px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            color: var(--white);
+            text-decoration: none;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: rgba(147, 197, 253, 0.1);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--light-blue);
+            color: var(--primary-blue);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-lg);
+        }
+
+        .footer-section h4 {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+            color: var(--white);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .footer-section a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--light-blue);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-lg);
+            border-top: 1px solid #374151;
+        }
+
+        .footer-bottom p {
+            color: #9ca3af;
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        /* WhatsApp Float Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .whatsapp-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            box-shadow: var(--shadow-lg);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .whatsapp-icon {
+            font-size: 1.5rem;
+            color: var(--white);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: var(--white);
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: var(--shadow-lg);
+                padding: var(--spacing-lg) 0;
+                gap: var(--spacing-sm);
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: translateY(7px) rotate(45deg);
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: translateY(-7px) rotate(-45deg);
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+                text-align: center;
+            }
+
+            .hero-title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .hero-subtitle {
+                font-size: var(--font-size-lg);
+            }
+
+            .hero-stats {
+                justify-content: center;
+                gap: var(--spacing-lg);
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .section-header h2 {
+                font-size: var(--font-size-2xl);
+            }
+
+            .section-header p {
+                font-size: var(--font-size-base);
+            }
+
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-xl);
+            }
+
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .whatsapp-float {
+                bottom: 15px;
+                right: 15px;
+            }
+
+            .whatsapp-button {
+                width: 50px;
+                height: 50px;
+            }
+
+            .whatsapp-icon {
+                font-size: 1.2rem;
+            }
+        }
+
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+        .text-right { text-align: right; }
+        .hidden { display: none; }
+        .visible { display: block; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <!-- 📍 BUSCAR: "logo Lamedi" -->
+                    <img src="images/logo Lamedi.jpeg" alt="LAMEDI Logo" class="logo">
+                    <div class="logo-text">
+                        <span class="logo-title">LAMEDI</span>
+                        <span class="logo-subtitle">UNADES</span>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" data-section="home">Início</a></li>
+                    <li><a href="#" class="nav-link" data-section="sobre">Sobre</a></li>
+                    <li><a href="#" class="nav-link" data-section="diretoria">Diretoria</a></li>
+                    <li><a href="#" class="nav-link" data-section="atividades">Atividades</a></li>
+                    <li><a href="#" class="nav-link" data-section="processo-seletivo">Processo Seletivo</a></li>
+                    <li><a href="#" class="nav-link" data-section="galeria">Galeria</a></li>
+                    <li><a href="#" class="nav-link" data-section="documentos">Documentos</a></li>
+                    <li><a href="#" class="nav-link" data-section="contato">Contato</a></li>
+                    <li><a href="#" class="nav-link" data-section="faq">FAQ</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">Desde 2023</div>
+                <h1 class="hero-title">Liga Acadêmica de <span class="highlight">Medicina Interna</span></h1>
+                <p class="hero-subtitle">Formando estudantes comprometidos com a excelência acadêmica, o humanismo e a pesquisa clínica, promovendo um aprendizado integral desde os primeiros anos de graduação.</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">20</span>
+                        <span class="stat-label">Membros Ativos</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Orientadores</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">Anos de História</span>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#" class="btn btn-primary" data-section="processo-seletivo">Processo Seletivo</a>
+                    <a href="#" class="btn btn-secondary" data-section="sobre">Conhecer Mais</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-card">
+                    <!-- 📍 BUSCAR: "atividade 01" -->
+                    <img src="images/atividades/atividade 02.jpg" alt="Atividade LAMEDI">
+                    <h3>Próxima Atividade</h3>
+                    <p><strong>Aula de Espanhol Médico</strong></p>
+                    <p>Toda segunda-feira às 18h</p>
+                    <span class="activity-tag">Presencial + Online</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mission Preview -->
+        <div class="container" style="padding: var(--spacing-2xl) var(--spacing-sm);">
+            <div class="section-header">
+                <h2>Nossa Missão</h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+                <p style="font-size: var(--font-size-xl); line-height: 1.8; color: var(--text-dark);">
+                    A LAMEDI tem como missão formar estudantes comprometidos com a excelência acadêmica, o humanismo e a pesquisa clínica, promovendo um aprendizado integral que una a teoria médica à prática assistencial desde os primeiros anos de graduação.
+                </p>
+            </div>
+        </div>
+
+        <!-- Pillars Preview -->
+        <div class="container" style="padding: var(--spacing-2xl) var(--spacing-sm); background: var(--light-gray);">
+            <div class="section-header">
+                <h2>Nossos Pilares</h2>
+                <p>O que nos torna únicos na formação médica</p>
+            </div>
+            <div class="grid-4">
+                <div class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Ensino Integrado</h3>
+                    <p>Aproximamos estudantes do ciclo básico e pré-clínico às experiências reais da medicina interna com orientadores de excelência.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔬</div>
+                    <h3>Pesquisa Clínica</h3>
+                    <p>Incentivamos a produção científica e o desenvolvimento de projetos de pesquisa na área de medicina interna.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌐</div>
+                    <h3>Espanhol Médico</h3>
+                    <p>Oferecemos aulas de espanhol médico para fortalecer a formação internacional dos nossos membros.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💪</div>
+                    <h3>Reforço Acadêmico</h3>
+                    <p>Proporcionamos reforços das disciplinas do ciclo básico, fortalecendo as bases para uma formação sólida.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Section -->
+    <section id="sobre" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Sobre a LAMEDI</h2>
+                <p>Conheça nossa história e objetivos</p>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: var(--spacing-2xl);">
+                <div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md); font-size: var(--font-size-2xl);">Nossa História</h3>
+                    <p style="margin-bottom: var(--spacing-md); line-height: 1.8;">
+                        Fundada em 2023 na UNADES, a LAMEDI nasceu da necessidade de aproximar os estudantes de medicina da prática clínica desde os primeiros anos de formação. Com o apoio de docentes orientadores de excelência, criamos um ambiente de aprendizado único e transformador.
+                    </p>
+                    <p style="margin-bottom: var(--spacing-md); line-height: 1.8;">
+                        Nossa liga se destaca pelo caráter integrador e formativo, oferecendo aos estudantes do ciclo básico e pré-clínico acesso a experiências reais da medicina interna, sempre acompanhados por profissionais renomados.
+                    </p>
+                </div>
+                <div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md); font-size: var(--font-size-2xl);">Nosso Diferencial</h3>
+                    <p style="margin-bottom: var(--spacing-md); line-height: 1.8;">
+                        O diferencial da LAMEDI é seu caráter integrador e formativo, no qual os estudantes do ciclo básico e pré-clínico têm acesso a experiências reais da medicina interna, acompanhados por docentes orientadores de excelência.
+                    </p>
+                    <p style="line-height: 1.8;">
+                        Além disso, oferecemos espaços extras de aprendizado, como reforços das disciplinas do ciclo básico e aulas de espanhol médico, o que nos torna uma liga única pelo compromisso com o desenvolvimento acadêmico e humano de seus membros.
+                    </p>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h2>Nosso Objetivo Principal</h2>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; background: var(--light-gray); padding: var(--spacing-xl); border-radius: var(--border-radius-xl);">
+                <p style="font-size: var(--font-size-xl); line-height: 1.8; color: var(--text-dark);">
+                    Aproximar o estudante do conhecimento e da prática da medicina interna, não apenas no cuidado ao adulto, mas também por meio de atividades complementares, como reforço das disciplinas do ciclo básico e aulas de espanhol médico, fortalecendo assim as bases para uma formação sólida e integral.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diretoria Section -->
+    <section id="diretoria" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossa Diretoria</h2>
+                <p>Líderes comprometidos com a excelência acadêmica</p>
+            </div>
+
+            <div class="grid-4">
+                <!-- 📍 BUSCAR: "Presidente.jpg" -->
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/Presidente.jpg" alt="Rany Luciano - Presidente LAMEDI">
+                    </div>
+                    <h4>Rany Luciano</h4>
+                    <p>Presidente da Liga</p>
+                </div>
+
+                <!-- 📍 BUSCAR: "vice-presidente.jpg" -->
+                <div class="team-card">
+                    <div class="team-photo">
+                        <img src="images/vice-presidente.jpg" alt="João Lucas - Vice-Presidente LAMEDI">
+                    </div>
+                    <h4>João Lucas</h4>
+                    <p>Vice-Presidente</p>
+                </div>
+
+                <!-- Placeholders para futuras fotos da diretoria -->
+                <div class="team-card">
+                    <div class="team-photo placeholder">
+                        <span>Foto em breve</span>
+                    </div>
+                    <h4>Secretário(a)</h4>
+                    <p>Secretaria</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo placeholder">
+                        <span>Foto em breve</span>
+                    </div>
+                    <h4>Diretor(a) Financeiro</h4>
+                    <p>Finanças</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo placeholder">
+                        <span>Foto em breve</span>
+                    </div>
+                    <h4>Diretora de Ensino</h4>
+                    <p>Diretora de Ensino</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo placeholder">
+                        <span>Foto em breve</span>
+                    </div>
+                    <h4>Diretora de Investigação</h4>
+                    <p>Diretora de Investigação</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo placeholder">
+                        <span>Foto em breve</span>
+                    </div>
+                    <h4>Diretor(a) de Marketing</h4>
+                    <p>Marketing</p>
+                </div>
+
+                <div class="team-card">
+                    <div class="team-photo placeholder">
+                        <span>Foto em breve</span>
+                    </div>
+                    <h4>Diretora de Extensão</h4>
+                    <p>Diretora de Extensão</p>
+                </div>
+            </div>
+
+            <div class="section-header" style="margin-top: var(--spacing-2xl);">
+                <h2>Orientadores</h2>
+                <p>Professores que nos guiam na jornada acadêmica</p>
+            </div>
+
+            <div class="grid-3">
+                <!-- 📍 BUSCAR: "orientador 01.jpg" -->
+                <div class="card text-center">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto var(--spacing-md); overflow: hidden;">
+                        <img src="images/orientador 01.jpg" alt="Dr. Juan Avalos" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3>Dr. Juan Avalos</h3>
+                    <p>Professor Orientador de Medicina Interna com vasta experiência clínica e acadêmica.</p>
+                </div>
+
+                <!-- Placeholders para futuras orientadoras -->
+                <div class="card text-center">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto var(--spacing-md); background: var(--light-gray); display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 12px;">
+                        Foto em breve
+                    </div>
+                    <h3>Dra. Fabiana Gimenez</h3>
+                    <p>Professora especialista em Medicina Interna, dedicada à formação de novos profissionais.</p>
+                </div>
+
+                <div class="card text-center">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto var(--spacing-md); background: var(--light-gray); display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 12px;">
+                        Foto em breve
+                    </div>
+                    <h3>Dra. Milena Gonzales</h3>
+                    <p>Professora orientadora com foco em pesquisa clínica e desenvolvimento acadêmico.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Atividades Section -->
+    <section id="atividades" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossas Atividades</h2>
+                <p>Programação semanal de formação e desenvolvimento</p>
+            </div>
+
+            <div class="section-header">
+                <h3>Atividades Semanais</h3>
+                <p>Nossa programação regular durante a semana</p>
+            </div>
+
+            <div style="display: flex; gap: var(--spacing-md); overflow-x: auto; padding: var(--spacing-sm) 0; margin-bottom: var(--spacing-2xl);">
+                <!-- 📍 BUSCAR: "atividade 02.jpg" até "atividade 06.jpg" -->
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">SEGUNDA</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Espanhol Médico</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">18h - Sala 203</p>
+                    <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Aula</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividade 05.jpg" alt="Discussão de Casos" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">TERÇA</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Discussão de Casos</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">19h - Auditório Principal</p>
+                    <span style="background: var(--success); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Prática</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividade 03.jpg" alt="Reforço Anatomia" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">QUARTA</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Reforço Anatomia</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17h - Laboratório</p>
+                    <span style="background: var(--warning); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Reforço</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/Diretorio.jpg" alt="Reunião Diretoria" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">QUINTA</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Reunião Diretoria</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">18h - Sala da Liga</p>
+                    <span style="background: var(--dark-gray); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Administrativa</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividade 07.jpg" alt="Palestra" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">SEXTA</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Palestra Convidada</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">19h - Auditório Central</p>
+                    <span style="background: var(--error); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Palestra</span>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h3>Tipos de Atividades</h3>
+                <p>Diversas modalidades para uma formação completa</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🎤</div>
+                    <h3>Palestras e Conferências</h3>
+                    <p>Palestras com especialistas renomados em medicina interna, abordando temas atuais e relevantes para a prática clínica.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📖</div>
+                    <h3>Discussão de Casos Clínicos</h3>
+                    <p>Análise de casos reais da medicina interna, promovendo o raciocínio clínico e a tomada de decisões baseada em evidências.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💪</div>
+                    <h3>Reforço Acadêmico</h3>
+                    <p>Aulas de reforço das disciplinas do ciclo básico, fortalecendo os conhecimentos fundamentais para a medicina.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🌍</div>
+                    <h3>Espanhol Médico</h3>
+                    <p>Aulas semanais de espanhol com foco na terminologia médica, preparando para intercâmbios e prática internacional.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔬</div>
+                    <h3>Projetos de Pesquisa</h3>
+                    <p>Desenvolvimento de projetos de iniciação científica na área de medicina interna, com orientação especializada.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏥</div>
+                    <h3>Visitas Técnicas</h3>
+                    <p>Visitas a hospitais e centros médicos parceiros para vivência prática da rotina hospitalar em medicina interna.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Processo Seletivo Section -->
+    <section id="processo-seletivo" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Processo Seletivo 2025</h2>
+                <p>Faça parte da LAMEDI e transforme sua formação médica</p>
+            </div>
+
+            <div class="grid-2" style="margin-bottom: var(--spacing-2xl);">
+                <div style="background: var(--light-gray); padding: var(--spacing-xl); border-radius: var(--border-radius-xl);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md);">Quem Pode Participar</h3>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: var(--spacing-sm); display: flex; align-items: center; gap: var(--spacing-xs);">
+                            <span style="color: var(--success); font-size: var(--font-size-lg);">✓</span>
+                            Estudantes de medicina da UNADES
+                        </li>
+                        <li style="margin-bottom: var(--spacing-sm); display: flex; align-items: center; gap: var(--spacing-xs);">
+                            <span style="color: var(--success); font-size: var(--font-size-lg);">✓</span>
+                            A partir do 1º período
+                        </li>
+                        <li style="margin-bottom: var(--spacing-sm); display: flex; align-items: center; gap: var(--spacing-xs);">
+                            <span style="color: var(--success); font-size: var(--font-size-lg);">✓</span>
+                            Comprometimento com atividades semanais
+                        </li>
+                        <li style="margin-bottom: var(--spacing-sm); display: flex; align-items: center; gap: var(--spacing-xs);">
+                            <span style="color: var(--success); font-size: var(--font-size-lg);">✓</span>
+                            Interesse em medicina interna
+                        </li>
+                    </ul>
+                </div>
+                <div style="background: var(--white); padding: var(--spacing-xl); border-radius: var(--border-radius-xl); box-shadow: var(--shadow-md);">
+                    <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md);">Como Participar</h3>
+                    <div style="margin-bottom: var(--spacing-md);">
+                        <strong>1. Inscrição Online</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Preencha o formulário de inscrição com seus dados pessoais e acadêmicos.</p>
+                    </div>
+                    <div style="margin-bottom: var(--spacing-md);">
+                        <strong>2. Análise Curricular</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Avaliação do histórico acadêmico e experiências prévias.</p>
+                    </div>
+                    <div style="margin-bottom: var(--spacing-md);">
+                        <strong>3. Entrevista</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Entrevista com a diretoria para conhecer suas motivações.</p>
+                    </div>
+                    <div>
+                        <strong>4. Resultado</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Divulgação dos selecionados via email e redes sociais.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xl); border-radius: var(--border-radius-xl); text-align: center; margin-bottom: var(--spacing-2xl);">
+                <h3 style="margin-bottom: var(--spacing-md);">Cronograma do Processo Seletivo</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
+                    <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
+                        <strong>Inscrições</strong>
+                        <p>01/03 a 15/03/2025</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
+                        <strong>Análise</strong>
+                        <p>16/03 a 20/03/2025</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
+                        <strong>Entrevistas</strong>
+                        <p>21/03 a 25/03/2025</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
+                        <strong>Resultado</strong>
+                        <p>28/03/2025</p>
+                    </div>
+                </div>
+                <div style="margin-top: var(--spacing-lg);">
+                    <a href="https://forms.google.com/your-form-id" class="btn" style="background: var(--white); color: var(--primary-blue); border-color: var(--white);" target="_blank">Inscrever-se Agora</a>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <h3>Benefícios de ser Membro da LAMEDI</h3>
+            </div>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Formação Diferenciada</h3>
+                    <p>Acesso a experiências práticas desde o início do curso, com orientação de professores especialistas.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📚</div>
+                    <h3>Reforço Acadêmico</h3>
+                    <p>Aulas de reforço das disciplinas básicas e espanhol médico incluídas na programação.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🤝</div>
+                    <h3>Networking</h3>
+                    <p>Construção de uma rede de contatos com colegas, professores e profissionais da área.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔬</div>
+                    <h3>Pesquisa Científica</h3>
+                    <p>Oportunidades de participar de projetos de iniciação científica e publicações acadêmicas.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏥</div>
+                    <h3>Vivência Hospitalar</h3>
+                    <p>Visitas técnicas e experiências práticas em hospitais parceiros da liga.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📜</div>
+                    <h3>Certificação</h3>
+                    <p>Certificados de participação em todas as atividades e eventos da liga.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Galeria Section -->
+    <section id="galeria" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Galeria de Fotos</h2>
+                <p>Momentos especiais da nossa liga acadêmica</p>
+            </div>
+
+            <div class="section-header">
+                <h3>Eventos e Atividades</h3>
+            </div>
+
+            <!-- 📍 BUSCAR: "galeria 01.jpg" até "galeria 06.jpg" -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md); margin-bottom: var(--spacing-2xl);">
+                <div class="gallery-item">
+                    <img src="images/galeria 05.jpg" alt="Evento LAMEDI">
+                    <div class="gallery-overlay">
+                        <h4>Evento da LAMEDI</h4>
+                        <p>Atividade acadêmica</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/galeria 03.jpg" alt="Atividade LAMEDI">
+                    <div class="gallery-overlay">
+                        <h4>Atividade Prática</h4>
+                        <p>Aprendizado em grupo</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/galeria 01 (2).jpg" alt="Workshop LAMEDI">
+                    <div class="gallery-overlay">
+                        <h4>Workshop</h4>
+                        <p>Formação técnica</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/galeria 05.jpg" alt="Reunião LAMEDI">
+                    <div class="gallery-overlay">
+                        <h4>Reunião da Liga</h4>
+                        <p>Planejamento de atividades</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/galeria 06.jpg" alt="Estudo LAMEDI">
+                    <div class="gallery-overlay">
+                        <h4>Sessão de Estudos</h4>
+                        <p>Discussão de casos</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="images/galeria 04.jpg" alt="Evento LAMEDI">
+                    <div class="gallery-overlay">
+                        <h4>Evento Especial</h4>
+                        <p>Momento marcante</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; background: var(--light-gray); padding: var(--spacing-xl); border-radius: var(--border-radius-xl);">
+                <p style="font-size: var(--font-size-lg); color: var(--text-light); margin-bottom: var(--spacing-md);">
+                    Siga-nos no Instagram para mais fotos e momentos especiais da LAMEDI
+                </p>
+                <a href="https://instagram.com/lamedi_unades_" class="btn btn-primary" target="_blank">
+                    📷 Seguir @lamedi_unades_
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentos Section -->
+    <section id="documentos" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Documentos</h2>
+                <p>Estatutos, regulamentos e documentos oficiais da LAMEDI</p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md);">Documentos Oficiais</h3>
+                    <div style="space-y: var(--spacing-md);">
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                                <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📄</div>
+                                <div style="flex: 1;">
+                                    <h4>Estatuto da LAMEDI</h4>
+                                    <p style="color: var(--text-light); font-size: var(--font-size-sm);">Documento oficial com as normas e diretrizes da liga acadêmica.</p>
+                                    <a href="#" class="btn btn-secondary" style="margin-top: var(--spacing-xs); padding: 6px 12px; font-size: var(--font-size-xs);">Download PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                                <div style="background: var(--success); color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📋</div>
+                                <div style="flex: 1;">
+                                    <h4>Regulamento Interno</h4>
+                                    <p style="color: var(--text-light); font-size: var(--font-size-sm);">Regras internas para funcionamento e atividades da LAMEDI.</p>
+                                    <a href="#" class="btn btn-secondary" style="margin-top: var(--spacing-xs); padding: 6px 12px; font-size: var(--font-size-xs);">Download PDF</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                                <div style="background: var(--warning); color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📜</div>
+                                <div style="flex: 1;">
+                                    <h4>Ata de Fundação</h4>
+                                    <p style="color: var(--text-light); font-size: var(--font-size-sm);">Documento histórico da criação da liga em 2023.</p>
+                                    <a href="#" class="btn btn-secondary" style="margin-top: var(--spacing-xs); padding: 6px 12px; font-size: var(--font-size-xs);">Download PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md);">Editais e Processos</h3>
+                    <div style="space-y: var(--spacing-md);">
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                                <div style="background: var(--error); color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📢</div>
+                                <div style="flex: 1;">
+                                    <h4>Edital Processo Seletivo 2025</h4>
+                                    <p style="color: var(--text-light); font-size: var(--font-size-sm);">Edital completo com todas as informações para ingressar na LAMEDI.</p>
+                                    <a href="#" class="btn btn-primary" style="margin-top: var(--spacing-xs); padding: 6px 12px; font-size: var(--font-size-xs);">Download PDF</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                                <div style="background: var(--dark-gray); color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📝</div>
+                                <div style="flex: 1;">
+                                    <h4>Formulário de Inscrição</h4>
+                                    <p style="color: var(--text-light); font-size: var(--font-size-sm);">Formulário para candidatura ao processo seletivo.</p>
+                                    <a href="https://forms.google.com/your-form-id" class="btn btn-primary" style="margin-top: var(--spacing-xs); padding: 6px 12px; font-size: var(--font-size-xs);" target="_blank">Preencher Online</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                                <div style="background: var(--light-blue); color: var(--primary-blue); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📊</div>
+                                <div style="flex: 1;">
+                                    <h4>Relatório de Atividades 2024</h4>
+                                    <p style="color: var(--text-light); font-size: var(--font-size-sm);">Balanço das atividades realizadas durante o ano de 2024.</p>
+                                    <a href="#" class="btn btn-secondary" style="margin-top: var(--spacing-xs); padding: 6px 12px; font-size: var(--font-size-xs);">Download PDF</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: var(--light-gray); padding: var(--spacing-xl); border-radius: var(--border-radius-xl); text-align: center; margin-top: var(--spacing-2xl);">
+                <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md);">Precisa de Outro Documento?</h3>
+                <p style="margin-bottom: var(--spacing-md); color: var(--text-light);">
+                    Entre em contato conosco se precisar de algum documento específico ou tiver dúvidas sobre os regulamentos da LAMEDI.
+                </p>
+                <a href="mailto:ligallamedi@gmail.com" class="btn btn-primary">✉️ Solicitar Documento</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato Section -->
+    <section id="contato" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Entre em Contato</h2>
+                <p>Fale conosco e tire suas dúvidas sobre a LAMEDI</p>
+            </div>
+
+            <div class="grid-2">
+                <div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md);">Informações de Contato</h3>
+                    
+                    <div class="card" style="margin-bottom: var(--spacing-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                            <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">✉️</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p style="color: var(--text-light);">ligallamedi@gmail.com</p>
+                                <a href="mailto:ligallamedi@gmail.com" style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Enviar Email</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom: var(--spacing-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                            <div style="background: #25d366; color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📱</div>
+                            <div>
+                                <h4>WhatsApp</h4>
+                                <p style="color: var(--text-light);">Resposta rápida e direta</p>
+                                <a href="https://wa.me/+5592981758438?text=Olá! Gostaria de saber mais sobre a LAMEDI" style="color: #25d366; text-decoration: none; font-weight: 600;" target="_blank">Falar no WhatsApp</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin-bottom: var(--spacing-md);">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                            <div style="background: #e4405f; color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📷</div>
+                            <div>
+                                <h4>Instagram</h4>
+                                <p style="color: var(--text-light);">@lamedi_unades_</p>
+                                <a href="https://instagram.com/lamedi_unades_" style="color: #e4405f; text-decoration: none; font-weight: 600;" target="_blank">Seguir no Instagram</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div style="display: flex; align-items: center; gap: var(--spacing-md);">
+                            <div style="background: var(--warning); color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📍</div>
+                            <div>
+                                <h4>Localização</h4>
+                                <p style="color: var(--text-light);">UNADES - Universidad Autónoma del Sur</p>
+                                <p style="color: var(--text-light); font-size: var(--font-size-sm);">Sala da Liga LAMEDI</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md);">Envie uma Mensagem</h3>
+                    
+                    <form style="background: var(--white); padding: var(--spacing-xl); border-radius: var(--border-radius-lg); box-shadow: var(--shadow-md);">
+                        <div class="form-group">
+                            <label>Nome Completo</label>
+                            <input type="text" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" class="form-input" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Período do Curso</label>
+                            <select class="form-input" required>
+                                <option value="">Selecione seu período</option>
+                                <option value="1">1º Período</option>
+                                <option value="2">2º Período</option>
+                                <option value="3">3º Período</option>
+                                <option value="4">4º Período</option>
+                                <option value="5">5º Período</option>
+                                <option value="6">6º Período</option>
+                                <option value="7">7º Período</option>
+                                <option value="8">8º Período</option>
+                                <option value="9">9º Período</option>
+                                <option value="10">10º Período</option>
+                                <option value="11">11º Período</option>
+                                <option value="12">12º Período</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Assunto</label>
+                            <select class="form-input" required>
+                                <option value="">Selecione o assunto</option>
+                                <option value="processo-seletivo">Processo Seletivo</option>
+                                <option value="atividades">Atividades da Liga</option>
+                                <option value="duvidas-gerais">Dúvidas Gerais</option>
+                                <option value="parcerias">Parcerias</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Mensagem</label>
+                            <textarea class="form-input form-textarea" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                        </div>
+                        
+                        <div style="text-align: center;">
+                            <button type="submit" class="btn btn-primary" style="border: none;">Enviar Mensagem</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Perguntas Frequentes</h2>
+                <p>Tire suas principais dúvidas sobre a LAMEDI</p>
+            </div>
+
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>O que é a LAMEDI?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A LAMEDI é a Liga Acadêmica de Medicina Interna da UNADES, fundada em 2023. Somos uma organização estudantil que tem como missão formar estudantes comprometidos com a excelência acadêmica, o humanismo e a pesquisa clínica.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Quem pode participar da LAMEDI?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Podem participar todos os estudantes de medicina da UNADES, a partir do 1º período. É importante ter comprometimento com as atividades semanais e interesse genuíno pela medicina interna.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Quais são as atividades da liga?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Oferecemos atividades semanais incluindo: aulas de espanhol médico (segundas), discussão de casos clínicos (terças), reforço de anatomia (quartas), reuniões da diretoria (quintas) e palestras com convidados (sextas).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Como funciona o processo seletivo?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>O processo seletivo envolve inscrição online, análise curricular e entrevista com a diretoria. As inscrições para 2025 ocorrem de 01/03 a 15/03, com resultado em 28/03.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>A LAMEDI oferece aulas de espanhol médico?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! Uma das características únicas da LAMEDI são as aulas semanais de espanhol médico, todas as segundas-feiras às 18h. Isso fortalece a formação internacional dos nossos membros.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Há oportunidades de pesquisa científica?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Sim! A LAMEDI incentiva a pesquisa clínica e oferece oportunidades de participar de projetos de iniciação científica, com orientação dos nossos professores especialistas.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Quantos membros a liga possui?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Atualmente, a LAMEDI conta com 20 membros ativos, além da diretoria composta por 8 diretores em diferentes áreas e 3 professores orientadores.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>A participação na liga tem algum custo?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>A participação básica nas atividades da LAMEDI é gratuita. Eventualmente, podem haver custos específicos para materiais ou eventos especiais, sempre comunicados com antecedência.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Como posso entrar em contato com a LAMEDI?</span>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Você pode nos contactar pelo email ligallamedi@gmail.com, pelo WhatsApp +5592981758438, ou seguindo nosso Instagram @lamedi_unades_. Também temos uma sala na UNADES para atendimento presencial.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: var(--spacing-2xl); background: var(--light-gray); padding: var(--spacing-xl); border-radius: var(--border-radius-xl);">
+                <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md);">Ainda tem dúvidas?</h3>
+                <p style="margin-bottom: var(--spacing-md); color: var(--text-light);">
+                    Entre em contato conosco pelo WhatsApp para esclarecer qualquer questão sobre a LAMEDI.
+                </p>
+                <a href="https://wa.me/+5592981758438?text=Olá! Tenho uma dúvida sobre a LAMEDI" class="btn btn-whatsapp" target="_blank">
+                    💬 Falar no WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-logo">
+                        <!-- 📍 BUSCAR: Logo no footer (mesmo do header) -->
+                        <img src="images/logo Lamedi.jpeg" alt="LAMEDI" class="logo">
+                        <div class="footer-logo-text">
+                            <span class="footer-title">LAMEDI</span>
+                            <span class="footer-subtitle">Liga Acadêmica de Medicina Interna</span>
+                        </div>
+                    </div>
+                    <p class="footer-description">Formando estudantes comprometidos com a excelência acadêmica, o humanismo e a pesquisa clínica desde 2023.</p>
+                    <div class="social-links">
+                        <a href="https://instagram.com/lamedi_unades_" target="_blank" class="social-link">
+                            📷 Instagram
+                        </a>
+                        <a href="mailto:ligallamedi@gmail.com" class="social-link">
+                            ✉️ Email
+                        </a>
+                        <a href="https://wa.me/+5592981758438" target="_blank" class="social-link">
+                            📱 WhatsApp
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-section">
+                        <h4>Liga</h4>
+                        <ul>
+                            <li><a href="#" data-section="sobre">Sobre Nós</a></li>
+                            <li><a href="#" data-section="diretoria">Diretoria</a></li>
+                            <li><a href="#" data-section="documentos">Documentos</a></li>
+                            <li><a href="#" data-section="faq">FAQ</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Atividades</h4>
+                        <ul>
+                            <li><a href="#" data-section="atividades">Programação</a></li>
+                            <li><a href="#" data-section="galeria">Galeria</a></li>
+                            <li><a href="#" data-section="processo-seletivo">Processo Seletivo</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 LAMEDI - Liga Acadêmica de Medicina Interna da UNADES. Todos os direitos reservados.</p>
+                <p>Desenvolvido com ❤️ por estudantes, para estudantes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Chat Button -->
+    <div class="whatsapp-float">
+        <a href="https://wa.me/+5592981758438?text=Olá! Gostaria de saber mais sobre a LAMEDI" target="_blank" class="whatsapp-button">
+            <span class="whatsapp-icon">💬</span>
+        </a>
+    </div>
+
+    <!-- JavaScript COMPLETO - TODOS OS BOTÕES FUNCIONANDO -->
+    <script>
+        // Navigation functionality - FUNCIONA 100%
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger && navMenu) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // Navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and sections
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    const sectionId = this.getAttribute('data-section');
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                    
+                    // Close mobile menu
+                    if (hamburger && navMenu) {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            // Footer links
+            const footerLinks = document.querySelectorAll('a[data-section]');
+            footerLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links and sections
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    sections.forEach(s => s.classList.remove('active'));
+                    
+                    // Find corresponding nav link and activate it
+                    const sectionId = this.getAttribute('data-section');
+                    const navLink = document.querySelector(`.nav-link[data-section="${sectionId}"]`);
+                    if (navLink) {
+                        navLink.classList.add('active');
+                    }
+                    
+                    // Show corresponding section
+                    const targetSection = document.getElementById(sectionId);
+                    if (targetSection) {
+                        targetSection.classList.add('active');
+                    }
+                    
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            });
+
+            // Header scroll effect
+            const header = document.querySelector('.header');
+            if (header) {
+                window.addEventListener('scroll', function() {
+                    const currentScrollY = window.scrollY;
+
+                    if (currentScrollY > 50) {
+                        header.style.background = 'rgba(255, 255, 255, 0.95)';
+                        header.style.backdropFilter = 'blur(10px)';
+                    } else {
+                        header.style.background = 'var(--white)';
+                        header.style.backdropFilter = 'none';
+                    }
+                });
+            }
+
+            // Form submission
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Obrigado pela sua mensagem! Entraremos em contato em breve.');
+                    form.reset();
+                });
+            });
+        });
+
+        // FAQ functionality - FUNCIONA 100%
+        function toggleFAQ(element) {
+            const faqItem = element.parentNode;
+            const faqAnswer = faqItem.querySelector('.faq-answer');
+            const faqToggle = element.querySelector('.faq-toggle');
+            
+            faqItem.classList.toggle('active');
+            
+            if (faqItem.classList.contains('active')) {
+                faqToggle.textContent = '×';
+            } else {
+                faqToggle.textContent = '+';
+            }
+        }
+
+        // WhatsApp chat functionality - FUNCIONA 100%
+        function openWhatsAppChat(message = '') {
+            const phoneNumber = '+5592981758438';
+            const encodedMessage = encodeURIComponent(message || 'Olá! Gostaria de saber mais sobre a LAMEDI');
+            const whatsappUrl = `https://wa.me/${phoneNumber.replace(/\D/g, '')}?text=${encodedMessage}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Garantir que todos os links externos abram em nova aba
+        document.addEventListener('DOMContentLoaded', function() {
+            const externalLinks = document.querySelectorAll('a[target="_blank"]');
+            externalLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Permitir abertura em nova aba
+                    return true;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
