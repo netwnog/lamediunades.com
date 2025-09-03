@@ -845,6 +845,25 @@
         .text-right { text-align: right; }
         .hidden { display: none; }
         .visible { display: block; }
+        /* Remove TODO o conteúdo extra da home quando não estiver ativa */
+.section:not(.active) .hero-container,
+.section:not(.active) .container[style*="padding: var(--spacing-2xl)"],
+.section:not(.active) .section-header,
+.section:not(.active) .grid-4 {
+    display: none !important;
+}
+
+/* OU método mais específico - adicione IDs nas divs */
+#nossa-missao,
+#nossos-pilares {
+    display: none;
+}
+
+#home.active #nossa-missao,
+#home.active #nossos-pilares {
+    display: block;
+}
+
     </style>
 </head>
 <body>
@@ -893,7 +912,7 @@
                         <span class="stat-label">Membros Ativos</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">3</span>
+                        <span class="stat-number">4</span>
                         <span class="stat-label">Orientadores</span>
                     </div>
                     <div class="stat">
@@ -940,7 +959,7 @@
                 <div class="card">
                     <div class="card-icon">🎓</div>
                     <h3>Ensino Integrado</h3>
-                    <p>Aproximamos estudantes do ciclo básico e pré-clínico às experiências reais da medicina interna com orientadores de excelência.</p>
+                    <p>Aproximamos estudantes do ciclo básico e pré-clínico às experiências da medicina interna com orientadores de excelência.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">🔬</div>
@@ -973,16 +992,16 @@
                 <div>
                     <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md); font-size: var(--font-size-2xl);">Nossa História</h3>
                     <p style="margin-bottom: var(--spacing-md); line-height: 1.8;">
-                        Fundada em 2023 na UNADES, a LAMEDI nasceu da necessidade de aproximar os estudantes de medicina da prática clínica desde os primeiros anos de formação. Com o apoio de docentes orientadores de excelência, criamos um ambiente de aprendizado único e transformador.
+                        Fundada em 2023 na UNADES, a LAMEDI nasceu da necessidade de aproximar os estudantes de medicina da prática clínica desde os primeiros anos de formação.Tal ideia fomentada pelo 1º diretório, hoje a LAMEDI 2025 tem como principal pilar as atividades a oferecer aos estudantes com o apoio de docentes orientadores de excelência, criamos um ambiente de aprendizado único e transformador.
                     </p>
                     <p style="margin-bottom: var(--spacing-md); line-height: 1.8;">
-                        Nossa liga se destaca pelo caráter integrador e formativo, oferecendo aos estudantes do ciclo básico e pré-clínico acesso a experiências reais da medicina interna, sempre acompanhados por profissionais renomados.
+                        Nossa liga se destaca pelo caráter integrador e formativo, oferecendo aos estudantes do ciclo básico e pré-clínico acesso a experiências reais da medicina interna, sempre acompanhados por profissionais renomados na parte teórica e simulações práticas.
                     </p>
                 </div>
                 <div>
                     <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md); font-size: var(--font-size-2xl);">Nosso Diferencial</h3>
                     <p style="margin-bottom: var(--spacing-md); line-height: 1.8;">
-                        O diferencial da LAMEDI é seu caráter integrador e formativo, no qual os estudantes do ciclo básico e pré-clínico têm acesso a experiências reais da medicina interna, acompanhados por docentes orientadores de excelência.
+                        O diferencial da LAMEDI está em seu caráter integrador e formativo, oferecendo aos estudantes do ciclo básico e pré-clínico um espaço de aprendizado em medicina interna, acompanhado por docentes orientadores de excelência. Por meio de atividades acadêmicas e, em algumas ocasiões, simulações, fortalecemos nossos pilares fundamentais: a educação de qualidade, a integração acadêmica e o compromisso com a formação médica.
                     </p>
                     <p style="line-height: 1.8;">
                         Além disso, oferecemos espaços extras de aprendizado, como reforços das disciplinas do ciclo básico e aulas de espanhol médico, o que nos torna uma liga única pelo compromisso com o desenvolvimento acadêmico e humano de seus membros.
@@ -1029,7 +1048,7 @@
                 </div>
 
                 <!-- Placeholders para futuras fotos da diretoria -->
-                 <div class="team-card">
+                <div class="team-card">
                     <div class="team-photo">
                       <img src="images/secretaria.jpeg" alt="Janaina Nascimento Secretária - LAMEDI">
                     </div>
@@ -1037,7 +1056,7 @@
                     <p>Secretária</p>
                 </div>
 
-             <div class="team-card">
+                <div class="team-card">
                     <div class="team-photo">
                         <img src="images/financeiro.jpeg" alt="Ana Rachel Financeiro - LAMEDI">
                     </div>
@@ -1045,7 +1064,7 @@
                     <p>Finanças</p>
                 </div>
 
-               <div class="team-card">
+                <div class="team-card">
                     <div class="team-photo">
                         <img src="images/ensino.jpeg" alt="Gabriely Vitória Ensino - LAMEDI">
                     </div>
@@ -1053,14 +1072,14 @@
                     <p>Diretora de Ensino</p>
                 </div>
 
-             <div class="team-card">
+                <div class="team-card">
                     <div class="team-photo">
                         <img src="images/investigacao.jpeg" alt="Lanuzza Camporini Investigação - LAMEDI">
                     </div>
-                    <h4>Lanuzza Camporini</h4>
+                    <h4>Lanuzza Campolina</h4>
                     <p>Diretora de Investigação</p>
                 </div>
-                
+
                 <div class="team-card">
                     <div class="team-photo">
                        <img src="images/marketing.jpeg" alt="Nathaly Borba Marketing - LAMEDI">
@@ -1069,7 +1088,7 @@
                     <p>Marketing</p>
                 </div>
 
-               <div class="team-card">
+                <div class="team-card">
                     <div class="team-photo">
                          <img src="images/extensao.jpeg" alt="Bianca Beatriz Extensão - LAMEDI">
                     </div>
@@ -1090,33 +1109,35 @@
                         <img src="images/orientador 01.jpg" alt="Dr. Juan Avalos" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <h3>Dr. Juan Avalos</h3>
-                    <p>Professor Orientador de Medicina Interna com vasta experiência clínica e acadêmica.</p>
+                    <p>Professor Orientador da Liga em Medicina Interna com vasta experiência clínica e acadêmica.</p>
                 </div>
 
                 <!-- Placeholders para futuras orientadoras -->
-               <div class="card text-center">
+                <div class="card text-center">
                     <div style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto var(--spacing-md); overflow: hidden;">
                          <img src="images/orientador 02.jpg" alt="Dra. Fabiana Gimenez" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <h3>Dra. Fabiana Gimenez</h3>
                     <p>Professora co-orientadora da Liga de Medicina Interna</p>
                 </div>
-                
-                 <div class="card text-center">
+
+                <div class="card text-center">
                     <div style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto var(--spacing-md); background: var(--light-gray); display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 12px;">
 
                     </div>
-                    <h3>Dr. Héctor Adrian Franco</h3>
+                    <h3>Dr. Héctor Adrian Franco</h3> 
                     <p>Professor co-orientador da Liga de Medicina Interna</p>
                 </div>
-                
-                 <div class="card text-center">
-                    <div style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto var(--spacing-md); background: var(--light-gray); display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 12px;">
-                        Foto em breve
+
+                <div class="card text-center">
+                    <div style="width: 100px; height: 100px; border-radius: 50%; margin: 0 auto var(--spacing-md); overflow: hidden;">
+                         <img src="images/Orientadores/orientadora 03.jpeg" alt="Dra. Fabiana Gimenez" style="width: 100%; height: 100%; object-fit: cover;">
                     </div>
                     <h3>Dra. Milena Gonzalez</h3>
                     <p>Professora co-orientadora da Liga de Medicina Interna</p>
-            </div>
+                </div>
+
+                
         </div>
     </section>
 
@@ -1185,12 +1206,12 @@
                 <div class="card">
                     <div class="card-icon">🎤</div>
                     <h3>Palestras e Conferências</h3>
-                    <p>Palestras com especialistas renomados em medicina interna, abordando temas atuais e relevantes para a prática clínica.</p>
+                    <p>Palestras com especialistas renomados em diversas áreas da medicina, abordando temas atuais e relevantes para a prática clínica.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">📖</div>
-                    <h3>Discussão de Casos Clínicos</h3>
-                    <p>Análise de casos reais da medicina interna, promovendo o raciocínio clínico e a tomada de decisões baseada em evidências.</p>
+                    <h3>Ações sociais</h3>
+                    <p>A LAMEDI também contempla a realização de ações sociais, fortalecendo a integração acadêmica e reafirmando o compromisso com a comunidade, com iniciativas que transformam realidades e refletem os valores humanitários da medicina, sempre em sintonia com a organização institucional.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">💪</div>
@@ -1210,7 +1231,7 @@
                 <div class="card">
                     <div class="card-icon">🏥</div>
                     <h3>Visitas Técnicas</h3>
-                    <p>Visitas a hospitais e centros médicos parceiros para vivência prática da rotina hospitalar em medicina interna.</p>
+                    <p>Visitas a hospitais e centros médicos parceiros podem ser realizadas, proporcionando aos acadêmicos a oportunidade de vivenciar aspectos da rotina hospitalar em medicina interna, sempre que devidamente autorizadas e regularizadas pela instituição UNADES.</p>
                 </div>
             </div>
         </div>
@@ -1253,16 +1274,16 @@
                         <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Preencha o formulário de inscrição com seus dados pessoais e acadêmicos.</p>
                     </div>
                     <div style="margin-bottom: var(--spacing-md);">
-                        <strong>2. Análise Curricular</strong>
-                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Avaliação do histórico acadêmico e experiências prévias.</p>
+                        <strong>2. Prova</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Avaliação com 30 questões de  múltipla escolha.</p>
                     </div>
                     <div style="margin-bottom: var(--spacing-md);">
-                        <strong>3. Entrevista</strong>
-                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Entrevista com a diretoria para conhecer suas motivações.</p>
+                        <strong>3. Resultado</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Divulgação dos selecionados via email e redes sociais.</p>
                     </div>
                     <div>
-                        <strong>4. Resultado</strong>
-                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Divulgação dos selecionados via email e redes sociais.</p>
+                        <strong>4. Entrevista</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Entrevista com a diretoria para conhecer suas motivações.</p>
                     </div>
                 </div>
             </div>
@@ -1272,23 +1293,27 @@
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
                     <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
                         <strong>Inscrições</strong>
-                        <p>01/03 a 15/03/2025</p>
+                        <p>26/08 a 04/09/2025</p>
                     </div>
                     <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
-                        <strong>Análise</strong>
-                        <p>16/03 a 20/03/2025</p>
+                        <strongA>Aula Magna</strong>
+                        <p>04/09 de 17:30 às 20:30</p>
                     </div>
                     <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
-                        <strong>Entrevistas</strong>
-                        <p>21/03 a 25/03/2025</p>
+                        <strong>Prova</strong>
+                        <p>08/09 de 17:30 às 19:30</p>
                     </div>
                     <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
                         <strong>Resultado</strong>
-                        <p>28/03/2025</p>
+                        <p>11/09/2025</p>
+                    </div>
+                     <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
+                        <strong>Entrevista</strong>
+                        <p>06/10 a 10/10/2025</p>
                     </div>
                 </div>
                 <div style="margin-top: var(--spacing-lg);">
-                    <a href="https://forms.google.com/your-form-id" class="btn" style="background: var(--white); color: var(--primary-blue); border-color: var(--white);" target="_blank">Inscrever-se Agora</a>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3W13cxs90hyr-695cJLGlOmFeUmZb5qk3SG-8SU3DMIsLfw/viewform" class="btn" style="background: var(--white); color: var(--primary-blue); border-color: var(--white);" target="_blank">Inscrever-se Agora</a>
                 </div>
             </div>
 
@@ -1300,7 +1325,7 @@
                 <div class="card">
                     <div class="card-icon">🎓</div>
                     <h3>Formação Diferenciada</h3>
-                    <p>Acesso a experiências práticas desde o início do curso, com orientação de professores especialistas.</p>
+                    <p>Reforço nos conteúdos do ciclo básico e pré-clínico, aliado ao incentivo à pesquisa e iniciação científica; frequência e compromisso em atividades semanais, com aulas de espanhol integrando todos os pilares.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">📚</div>
@@ -1320,7 +1345,7 @@
                 <div class="card">
                     <div class="card-icon">🏥</div>
                     <h3>Vivência Hospitalar</h3>
-                    <p>Visitas técnicas e experiências práticas em hospitais parceiros da liga.</p>
+                    <p>Visitas a hospitais e centros médicos parceiros podem ser realizadas, proporcionando aos acadêmicos a oportunidade de vivenciar aspectos da rotina hospitalar em medicina interna, sempre que devidamente autorizadas e regularizadas pela instituição UNADES.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">📜</div>
@@ -1442,7 +1467,7 @@
                             <div style="display: flex; align-items: center; gap: var(--spacing-md);">
                                 <div style="background: var(--warning); color: var(--white); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📜</div>
                                 <div style="flex: 1;">
-                                    <h4>Ata de Fundação</h4>
+                                    <h4>Ata de Atividades</h4>
                                     <p style="color: var(--text-light); font-size: var(--font-size-sm);">Documento histórico da criação da liga em 2023.</p>
                                     <a href="#" class="btn btn-secondary" style="margin-top: var(--spacing-xs); padding: 6px 12px; font-size: var(--font-size-xs);">Download PDF</a>
                                 </div>
@@ -1480,7 +1505,7 @@
                             <div style="display: flex; align-items: center; gap: var(--spacing-md);">
                                 <div style="background: var(--light-blue); color: var(--primary-blue); padding: var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-xl);">📊</div>
                                 <div style="flex: 1;">
-                                    <h4>Relatório de Atividades 2024</h4>
+                                    <h4>Relatório de Atividades</h4>
                                     <p style="color: var(--text-light); font-size: var(--font-size-sm);">Balanço das atividades realizadas durante o ano de 2024.</p>
                                     <a href="#" class="btn btn-secondary" style="margin-top: var(--spacing-xs); padding: 6px 12px; font-size: var(--font-size-xs);">Download PDF</a>
                                 </div>
@@ -1641,7 +1666,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Podem participar todos os estudantes de medicina da UNADES, a partir do 1º período. É importante ter comprometimento com as atividades semanais e interesse genuíno pela medicina interna.</p>
+                        <p>Podem participar todos os estudantes de medicina da UNADES, a partir do 1º período. É importante ter comprometimento com as atividades semanais e interesse genuíno pela medicina .</p>
                     </div>
                 </div>
 
@@ -1651,7 +1676,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Oferecemos atividades semanais incluindo: aulas de espanhol médico (segundas), discussão de casos clínicos (terças), reforço de anatomia (quartas), reuniões da diretoria (quintas) e palestras com convidados (sextas).</p>
+                        <p>Oferecemos atividades semanais incluindo: aulas de espanhol médico, reforço do conteúdo básico e pré-clínico , assembleias da diretoria, palestras e simpósio .</p>
                     </div>
                 </div>
 
@@ -1661,7 +1686,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>O processo seletivo envolve inscrição online, análise curricular e entrevista com a diretoria. As inscrições para 2025 ocorrem de 01/03 a 15/03, com resultado em 28/03.</p>
+                        <p>O processo seletivo envolve inscrição online, prova e entrevista com a diretoria. As inscrições para 2025 ocorrem de 26/08 a 04/09, com resultado em 11/09.</p>
                     </div>
                 </div>
 
@@ -1671,7 +1696,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Sim! Uma das características únicas da LAMEDI são as aulas semanais de espanhol médico, todas as segundas-feiras às 18h. Isso fortalece a formação internacional dos nossos membros.</p>
+                        <p>Sim! Uma das características únicas da LAMEDI são as aulas semanais de espanhol médico, semanalmente às 18h. Isso fortalece a formação internacional dos nossos membros.</p>
                     </div>
                 </div>
 
@@ -1691,7 +1716,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Atualmente, a LAMEDI conta com 20 membros ativos, além da diretoria composta por 8 diretores em diferentes áreas e 3 professores orientadores.</p>
+                        <p>Atualmente, a LAMEDI conta com 20 membros ativos, além da diretoria composta por 8 diretores em diferentes áreas e 4 professores orientadores.</p>
                     </div>
                 </div>
 
@@ -1701,7 +1726,7 @@
                         <span class="faq-toggle">+</span>
                     </div>
                     <div class="faq-answer">
-                        <p>A participação básica nas atividades da LAMEDI é gratuita. Eventualmente, podem haver custos específicos para materiais ou eventos especiais, sempre comunicados com antecedência.</p>
+                        <p>A participação básica nas atividades da LAMEDI é de apenas R$20,00. </p>
                     </div>
                 </div>
 
@@ -1930,5 +1955,4 @@
     </script>
 </body>
 </html>
-
 
