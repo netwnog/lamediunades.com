@@ -273,7 +273,7 @@
         .hero-card {
             background: var(--white);
             border-radius: var(--border-radius-xl);
-            padding: var(--spacing-lg);
+            padding: auto(--spacing-lg);
             box-shadow: var(--shadow-xl);
             border: 1px solid var(--light-gray);
         }
@@ -863,10 +863,198 @@
 #home.active #nossos-pilares {
     display: block;
 }
+/* Estilos da Galeria */
+.galeria-section {
+    padding: 60px 0;
+    background: #f8f9fa;
+}
+
+.galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.foto-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background: white;
+}
+
+.foto-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.foto-thumbnail {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.foto-item:hover .foto-thumbnail {
+    transform: scale(1.05);
+}
+
+.foto-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    padding: 20px 15px 15px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.foto-item:hover .foto-overlay {
+    opacity: 1;
+}
+
+.comments-count {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Modal da Galeria */
+.modal-galeria {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-galeria-content {
+    position: relative;
+    margin: 2% auto;
+    width: 95%;
+    max-width: 1200px;
+    background-color: white;
+    border-radius: 12px;
+    max-height: 90vh;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.close-galeria {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2001;
+    color: #333;
+    background: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.close-galeria:hover {
+    color: #e74c3c;
+    transform: scale(1.1);
+}
+
+.modal-galeria-body {
+    display: flex;
+    min-height: 600px;
+}
+
+.foto-section {
+    flex: 2;
+    padding: 30px;
+    background: #fff;
+}
+
+
+.modal-image {
+    width: 100%;
+    max-height: 450px;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.foto-info {
+    margin-top: 20px;
+}
+
+.foto-info h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.foto-info p {
+    color: #7f8c8d;
+    line-height: 1.6;
+    font-size: 16px;
+}
+
+/* Comentários */
+
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .modal-galeria-body {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .comentarios-section {
+        border-left: none;
+        border-top: 1px solid #e9ecef;
+        max-height: 400px;
+    }
+    
+    .foto-section, .comentarios-section {
+        padding: 20px;
+    }
+    
+    .galeria-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+    
+    .modal-galeria-content {
+        width: 98%;
+        margin: 1% auto;
+    }
+}
+
 
     </style>
 </head>
 <body>
+    
     <!-- Header -->
     <header class="header">
         <nav class="navbar">
@@ -884,7 +1072,7 @@
                     <li><a href="#" class="nav-link" data-section="sobre">Sobre</a></li>
                     <li><a href="#" class="nav-link" data-section="diretoria">Diretoria</a></li>
                     <li><a href="#" class="nav-link" data-section="atividades">Atividades</a></li>
-                    <li><a href="#" class="nav-link" data-section="processo-seletivo">Processo Seletivo</a></li>
+                    <li><a href="#" class="nav-link" data-section="processo-seletivo">Área de inscrições</a></li>
                     <li><a href="#" class="nav-link" data-section="galeria">Galeria</a></li>
                     <li><a href="#" class="nav-link" data-section="documentos">Documentos</a></li>
                     <li><a href="#" class="nav-link" data-section="contato">Contato</a></li>
@@ -900,7 +1088,7 @@
     </header>
 
     <!-- Home Section -->
-    <section id="home" class="section active">
+   <section id="home" class="section active"> 
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">Desde 2023</div>
@@ -921,14 +1109,16 @@
                     </div>
                 </div>
                 <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary" data-section="processo-seletivo">Processo Seletivo</a>
+                    <a href="https://forms.gle/gWmj1Bs3bLHzC2YG8" class="btn btn-primary"  target="_blank">Inscrições Simposio</a>
                     <a href="#" class="btn btn-secondary" data-section="sobre">Conhecer Mais</a>
+                     
+
                 </div>
             </div>
             <div class="hero-image">
                 <div class="hero-card">
                     <!-- 📍 BUSCAR: "atividade 01" -->
-                    <img src="images/galeria 04.jpg" alt="Atividade LAMEDI">
+                    <img src="images/simposio.jpg" alt="Atividade LAMEDI">
                     
                 </div>
             </div>
@@ -956,12 +1146,12 @@
                 <div class="card">
                     <div class="card-icon">🎓</div>
                     <h3>Ensino Integrado</h3>
-                    <p>Aproximamos estudantes do ciclo básico e pré-clínico às experiências da medicina interna com orientadores de excelência.</p>
+                    <p>Aproximamos estudantes do ciclo básico e pré-clínico às experiências da medicina com orientadores de excelência.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">🔬</div>
                     <h3>Pesquisa Clínica</h3>
-                    <p>Incentivamos a produção científica e o desenvolvimento de projetos de pesquisa na área de medicina interna.</p>
+                    <p>Incentivamos a produção científica e o desenvolvimento de projetos de pesquisa na área de medicina.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">🌐</div>
@@ -992,13 +1182,13 @@
                         Fundada em 2023 na UNADES, a LAMEDI nasceu da necessidade de aproximar os estudantes de medicina da prática clínica desde os primeiros anos de formação.Tal ideia fomentada pelo 1º diretório, hoje a LAMEDI 2025 tem como principal pilar as atividades a oferecer aos estudantes com o apoio de docentes orientadores de excelência, criamos um ambiente de aprendizado único e transformador.
                     </p>
                     <p style="margin-bottom: var(--spacing-md); line-height: 1.8;">
-                        Nossa liga se destaca pelo caráter integrador e formativo, oferecendo aos estudantes do ciclo básico e pré-clínico acesso a experiências reais da medicina interna, sempre acompanhados por profissionais renomados na parte teórica e simulações práticas.
+                        Nossa liga se destaca pelo caráter integrador e formativo, oferecendo aos estudantes do ciclo básico e pré-clínico acesso a experiências reais da medicina, sempre acompanhados por profissionais renomados na parte teórica e simulações práticas.
                     </p>
                 </div>
                 <div>
                     <h3 style="color: var(--primary-blue); margin-bottom: var(--spacing-md); font-size: var(--font-size-2xl);">Nosso Diferencial</h3>
                     <p style="margin-bottom: var(--spacing-md); line-height: 1.8;">
-                        O diferencial da LAMEDI está em seu caráter integrador e formativo, oferecendo aos estudantes do ciclo básico e pré-clínico um espaço de aprendizado em medicina interna, acompanhado por docentes orientadores de excelência. Por meio de atividades acadêmicas e, em algumas ocasiões, simulações, fortalecemos nossos pilares fundamentais: a educação de qualidade, a integração acadêmica e o compromisso com a formação médica.
+                        O diferencial da LAMEDI está em seu caráter integrador e formativo, oferecendo aos estudantes do ciclo básico e pré-clínico um espaço de aprendizado em medicina, acompanhado por docentes orientadores de excelência. Por meio de atividades acadêmicas e, em algumas ocasiões, simulações, fortalecemos nossos pilares fundamentais: a educação de qualidade, a integração acadêmica e o compromisso com a formação médica.
                     </p>
                     <p style="line-height: 1.8;">
                         Além disso, oferecemos espaços extras de aprendizado, como reforços das disciplinas do ciclo básico e aulas de espanhol médico, o que nos torna uma liga única pelo compromisso com o desenvolvimento acadêmico e humano de seus membros.
@@ -1011,7 +1201,7 @@
             </div>
             <div style="max-width: 800px; margin: 0 auto; text-align: center; background: var(--light-gray); padding: var(--spacing-xl); border-radius: var(--border-radius-xl);">
                 <p style="font-size: var(--font-size-xl); line-height: 1.8; color: var(--text-dark);">
-                    Aproximar o estudante do conhecimento e da prática da medicina interna, não apenas no cuidado ao adulto, mas também por meio de atividades complementares, como reforço das disciplinas do ciclo básico e aulas de espanhol médico, fortalecendo assim as bases para uma formação sólida e integral.
+                    Aproximar o estudante do conhecimento sobre as  práticas médicas, não apenas no cuidado ao adulto, mas também por meio de atividades complementares, como reforço das disciplinas do ciclo básico e aulas de espanhol, fortalecendo assim as bases para uma formação sólida e integral.
                 </p>
             </div>
         </div>
@@ -1142,12 +1332,11 @@
     <section id="atividades" class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Nossas Atividades</h2>
-                <p>Programação semanal de formação e desenvolvimento</p>
-            </div>
+                
+                <h2>Atividades</h2>
 
             <div class="section-header">
-                <h3>Atividades Semanais</h3>
+                <h3>Eventos a serem realizados </h3>
                 <p>Nossa programação regular durante a semana</p>
             </div>
 
@@ -1155,43 +1344,132 @@
                 <!-- 📍 BUSCAR: "atividade 02.jpg" até "atividade 06.jpg" -->
                 <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
                     <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
-                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">SEGUNDA</div>
-                    <h4 style="margin-bottom: var(--spacing-xs);">Espanhol Médico</h4>
-                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">18h - Sala 203</p>
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">08/09/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Prova do processo seletivo</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
+                    <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Prova</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividade 05.jpg" alt="Discussão de Casos" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">11/09/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Reforço bioestatística</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
+                    <span style="background: var(--success); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Reforço</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividade 03.jpg" alt="Reforço Anatomia" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">De 02/10 a 04/10/2025 </div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Simpósio</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">Sala07-Sede do Lago</p>
+                    <span style="background: var(--warning); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Evento</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/Diretorio.jpg" alt="Reunião Diretoria" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">06/10 a 10/10/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Entrevista processo seletivo</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">Horário: após as aulas</p>
+                    <span style="background: var(--dark-gray); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Encerramento</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">09/10/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Aula de Espanhol Online </h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 </p>
+                    <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Aula</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividade 07.jpg" alt="Palestra" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">13/10/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Assembleia Geral</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">18h Sede Lago</p>
+                    <span style="background: var(--error); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Evento</span>
+                </div>
+
+                 <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">16/10/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Reunião dos projetos de investigação </h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
+                    <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Pesquisa</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">20/10/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Aula de Espanhol  </h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
+                    <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Aula</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">23/10/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Classe de Repasso </h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
+                    <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Prova</span>
+                </div>
+
+                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">27/10/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Aula de Espanhol  </h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
                     <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Aula</span>
                 </div>
 
                 <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
                     <img src="images/atividade 05.jpg" alt="Discussão de Casos" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
-                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">TERÇA</div>
-                    <h4 style="margin-bottom: var(--spacing-xs);">Discussão de Casos</h4>
-                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">19h - Auditório Principal</p>
-                    <span style="background: var(--success); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Prática</span>
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">30/10/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Reforço bioestatística</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
+                    <span style="background: var(--success); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Reforço</span>
+                </div>
+
+                 <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">03/11/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Aula de Espanhol Online </h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 </p>
+                    <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Aula</span>
+                </div>
+
+                 <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                    <img src="images/atividade 05.jpg" alt="Discussão de Casos" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">06/11/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Reforço</h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
+                    <span style="background: var(--success); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Reforço</span>
                 </div>
 
                 <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
-                    <img src="images/atividade 03.jpg" alt="Reforço Anatomia" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
-                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">QUARTA</div>
-                    <h4 style="margin-bottom: var(--spacing-xs);">Reforço Anatomia</h4>
-                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17h - Laboratório</p>
-                    <span style="background: var(--warning); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Reforço</span>
+                    <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">24/11/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Reunião dos projetos de investigação </h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
+                    <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Pesquisa</span>
                 </div>
 
                 <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
-                    <img src="images/Diretorio.jpg" alt="Reunião Diretoria" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
-                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">QUINTA</div>
-                    <h4 style="margin-bottom: var(--spacing-xs);">Reunião Diretoria</h4>
-                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">18h - Sala da Liga</p>
-                    <span style="background: var(--dark-gray); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Administrativa</span>
+                    <img src="images/atividades/atividade 02.jpg" alt="Aula de Espanhol" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">27/11/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Aula de Espanhol  </h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">17:30 às 19:30 Sala 07-Sede do lago</p>
+                    <span style="background: var(--light-blue); color: var(--primary-blue); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Aula</span>
                 </div>
 
-                <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
+                 <div style="min-width: 250px; background: var(--white); border: 2px solid var(--light-gray); border-radius: var(--border-radius-lg); padding: var(--spacing-md);">
                     <img src="images/atividade 07.jpg" alt="Palestra" style="width: 100%; height: 120px; object-fit: cover; border-radius: 6px; margin-bottom: 10px;">
-                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">SEXTA</div>
-                    <h4 style="margin-bottom: var(--spacing-xs);">Palestra Convidada</h4>
-                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">19h - Auditório Central</p>
-                    <span style="background: var(--error); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Palestra</span>
+                    <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-weight: 700; font-size: var(--font-size-sm); display: inline-block; margin-bottom: var(--spacing-sm);">01/12/2025</div>
+                    <h4 style="margin-bottom: var(--spacing-xs);">Assembleia de finalização </h4>
+                    <p style="font-size: var(--font-size-sm); color: var(--text-light); margin-bottom: var(--spacing-sm);">18h Sede Lago</p>
+                    <span style="background: var(--error); color: var(--white); padding: 2px var(--spacing-xs); border-radius: 12px; font-size: var(--font-size-xs); font-weight: 600;">Evento</span>
                 </div>
+
             </div>
 
             <div class="section-header">
@@ -1203,7 +1481,7 @@
                 <div class="card">
                     <div class="card-icon">🎤</div>
                     <h3>Palestras e Conferências</h3>
-                    <p>Palestras com especialistas renomados em diversas áreas da medicina, abordando temas atuais e relevantes para a prática clínica.</p>
+                    <p>Palestras com especialistas renomados em diversas áreas,e discussões abordando temas atuais e relevantes para a prática clínica.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">📖</div>
@@ -1217,7 +1495,7 @@
                 </div>
                 <div class="card">
                     <div class="card-icon">🌍</div>
-                    <h3>Espanhol Médico</h3>
+                    <h3>Espanhol </h3>
                     <p>Aulas semanais de espanhol com foco na terminologia médica, preparando para intercâmbios e prática internacional.</p>
                 </div>
                 <div class="card">
@@ -1228,18 +1506,18 @@
                 <div class="card">
                     <div class="card-icon">🏥</div>
                     <h3>Visitas Técnicas</h3>
-                    <p>Visitas a hospitais e centros médicos parceiros podem ser realizadas, proporcionando aos acadêmicos a oportunidade de vivenciar aspectos da rotina hospitalar em medicina interna, sempre que devidamente autorizadas e regularizadas pela instituição UNADES.</p>
+                    <p>Visitas a hospitais e centros médicos parceiros podem ser realizadas, proporcionando aos acadêmicos a oportunidade de vivenciar aspectos da rotina hospitalar em medicina, sempre que devidamente autorizadas e regularizadas pela instituição UNADES.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Processo Seletivo Section -->
+    <!-- Area de inscricoes Section -->
     <section id="processo-seletivo" class="section">
         <div class="container">
             <div class="section-header">
-                <h2>Processo Seletivo 2025</h2>
-                <p>Faça parte da LAMEDI e transforme sua formação médica</p>
+                <h2>Simpósio de Medicina Interna - Cuidado Integral do Adulto</h2>
+                <p>Participe do Simpósio e descubra novas perspectivas que podem transformar sua trajetória</p>
             </div>
 
             <div class="grid-2" style="margin-bottom: var(--spacing-2xl);">
@@ -1256,10 +1534,6 @@
                         </li>
                         <li style="margin-bottom: var(--spacing-sm); display: flex; align-items: center; gap: var(--spacing-xs);">
                             <span style="color: var(--success); font-size: var(--font-size-lg);">✓</span>
-                            Comprometimento com atividades semanais
-                        </li>
-                        <li style="margin-bottom: var(--spacing-sm); display: flex; align-items: center; gap: var(--spacing-xs);">
-                            <span style="color: var(--success); font-size: var(--font-size-lg);">✓</span>
                             Interesse em medicina interna
                         </li>
                     </ul>
@@ -1271,46 +1545,60 @@
                         <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Preencha o formulário de inscrição com seus dados pessoais e acadêmicos.</p>
                     </div>
                     <div style="margin-bottom: var(--spacing-md);">
-                        <strong>2. Prova</strong>
-                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Avaliação com 30 questões de  múltipla escolha.</p>
+                        <strong>2.Confirmação da inscrição</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Após o envio do formulário, sua inscrição será registrada automaticamente.</p>
                     </div>
                     <div style="margin-bottom: var(--spacing-md);">
-                        <strong>3. Resultado</strong>
-                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Divulgação dos selecionados via email e redes sociais.</p>
+                        <strong>3. Presença obrigatória</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Para receber o certificado, é indispensável participar do evento em sua totalidade. A presença será controlada.</p>
                     </div>
                     <div>
-                        <strong>4. Entrevista</strong>
-                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Entrevista com a diretoria para conhecer suas motivações.</p>
+                        <strong>4. Entrega do certificado</strong>
+                        <p style="color: var(--text-light); margin-top: var(--spacing-xs);">Os certificados serão enviados por e-mail, somente para aqueles que cumprirem os requisitos:
+
+Inscrição realizada com dados corretos.
+
+Presença completa no Simpósio.</p>
                     </div>
                 </div>
             </div>
 
             <div style="background: var(--primary-blue); color: var(--white); padding: var(--spacing-xl); border-radius: var(--border-radius-xl); text-align: center; margin-bottom: var(--spacing-2xl);">
-                <h3 style="margin-bottom: var(--spacing-md);">Cronograma do Processo Seletivo</h3>
+                <h3 style="margin-bottom: var(--spacing-md);">Cronograma do Simposio</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md); margin-bottom: var(--spacing-lg);">
                     <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
                         <strong>Inscrições</strong>
-                        <p>26/08 a 04/09/2025</p>
+                        <p>04/09 a 26/09/2025</p>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
+                        <strong>Cadastro de participantes</strong>
+                        <p>02/10 de 18:00 às 19:00</p>
+                    </div>
+
+                    <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
+                        <strong>Primeiro dia de Evento</strong>
+                        <p>02/10 de 19:30 às 22:00</p>
                     </div>
                     <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
-                        <strongA>Aula Magna</strong>
-                        <p>04/09 de 17:30 às 20:30</p>
+                        <strong>Segundo dia de Evento</strong>
+                        <p>03/10 de 19:30 às 22:00</p>
                     </div>
-                    <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
-                        <strong>Prova</strong>
-                        <p>08/09 de 17:30 às 19:30</p>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
-                        <strong>Resultado</strong>
-                        <p>11/09/2025</p>
-                    </div>
+
                      <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
-                        <strong>Entrevista</strong>
-                        <p>06/10 a 10/10/2025</p>
+                        <strong>Terceiro dia de Evento</strong>
+                        <p>04/10 de 08:30 às 18:00</p>
                     </div>
+
+                    <div style="background: rgba(255,255,255,0.1); padding: var(--spacing-md); border-radius: var(--border-radius);">
+                        <strong>Entrega de Certificados</strong>
+                        <p>
+                                Finalizado o Simpósio em até 30 dias  </p>
+                    </div>
+
                 </div>
                 <div style="margin-top: var(--spacing-lg);">
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc3W13cxs90hyr-695cJLGlOmFeUmZb5qk3SG-8SU3DMIsLfw/viewform" class="btn" style="background: var(--white); color: var(--primary-blue); border-color: var(--white);" target="_blank">Inscrever-se Agora</a>
+                    <a href="https://forms.gle/gWmj1Bs3bLHzC2YG8" class="btn" style="background: var(--white); color: var(--primary-blue); border-color: var(--white);" target="_blank">Inscreva-se Aqui !</a>
                 </div>
             </div>
 
@@ -1342,7 +1630,7 @@
                 <div class="card">
                     <div class="card-icon">🏥</div>
                     <h3>Vivência Hospitalar</h3>
-                    <p>Visitas a hospitais e centros médicos parceiros podem ser realizadas, proporcionando aos acadêmicos a oportunidade de vivenciar aspectos da rotina hospitalar em medicina interna, sempre que devidamente autorizadas e regularizadas pela instituição UNADES.</p>
+                    <p>Visitas a hospitais e centros médicos parceiros podem ser realizadas, proporcionando aos acadêmicos a oportunidade de vivenciar aspectos da rotina hospitalar em medicina, sempre que devidamente autorizadas e regularizadas pela instituição UNADES.</p>
                 </div>
                 <div class="card">
                     <div class="card-icon">📜</div>
@@ -1352,6 +1640,9 @@
             </div>
         </div>
     </section>
+
+
+
     <!-- Galeria Section -->
     <section id="galeria" class="section">
         <div class="container">
@@ -1363,57 +1654,112 @@
             <div class="section-header">
                 <h3>Eventos e Atividades</h3>
             </div>
-
-            <!-- 📍 BUSCAR: "galeria 01.jpg" até "galeria 06.jpg" -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-md); margin-bottom: var(--spacing-2xl);">
-                <div class="gallery-item">
-                    <img src="images/galeria 05.jpg" alt="Evento LAMEDI">
-                    <div class="gallery-overlay">
-                        <h4>Evento da LAMEDI</h4>
-                        <p>Atividade acadêmica</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/galeria 03.jpg" alt="Atividade LAMEDI">
-                    <div class="gallery-overlay">
-                        <h4>Atividade Prática</h4>
-                        <p>Aprendizado em grupo</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/galeria 01 (2).jpg" alt="Workshop LAMEDI">
-                    <div class="gallery-overlay">
-                        <h4>Workshop</h4>
-                        <p>Formação técnica</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/galeria 05.jpg" alt="Reunião LAMEDI">
-                    <div class="gallery-overlay">
-                        <h4>Reunião da Liga</h4>
-                        <p>Planejamento de atividades</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/galeria 06.jpg" alt="Estudo LAMEDI">
-                    <div class="gallery-overlay">
-                        <h4>Sessão de Estudos</h4>
-                        <p>Discussão de casos</p>
-                    </div>
-                </div>
-                
-                <div class="gallery-item">
-                    <img src="images/galeria 04.jpg" alt="Evento LAMEDI">
-                    <div class="gallery-overlay">
-                        <h4>Evento Especial</h4>
-                        <p>Momento marcante</p>
-                    </div>
+            <!-- Seção Galeria com Modal -->
+<section class="galeria-section">
+    <div class="container">
+        <h2 class="section-title">Galeria LAMEDI</h2>
+        
+        <!-- Grid de fotos da galeria -->
+        <div class="galeria-grid">
+            <div class="foto-item" data-id="1" data-title="Curso de Semiologia" data-description="O curso de Semiologia, organizado pela nossa Liga Acadêmica, foi realizado em duas etapas, nos dias 08 de maio e 29 de agosto, tornando-se uma experiência enriquecedora para todos os participantes. Com uma metodologia clara e dinâmica, o Dr. Juan Ávalos compartilhou conosco seus conhecimentos e sua ampla experiência clínica, proporcionando uma compreensão mais profunda dos fundamentos da semiologia médica.
+Registramos nosso mais sincero agradecimento ao Dr. Juan Ávalos por sua dedicação, compromisso e valiosa contribuição à formação acadêmica dos estudantes, deixando uma marca significativa em nosso aprendizado.">
+                <img src="images/galeria 07.jpg" alt="Evento LAMEDI" class="foto-thumbnail">
+                <div class="foto-overlay">
+                    <span class="comments-count">Curso de Semiologia </span>
                 </div>
             </div>
+            
+            <div class="foto-item" data-id="2" data-title="Semestre 2025.1" data-description="O primeiro semestre da LAMEDI foi marcado por aprendizado, integração e crescimento!
+📌 De março a maio vivemos momentos únicos:
+
+Aula Magna com o Dr. Juan Ávalos, sobre urgências e emergências.
+
+Processo seletivo e acolhida dos novos ligantes.
+
+Início do nosso projeto de iniciação científica.
+
+Curso de Semiologia (1ª parte), ampliando a prática clínica.
+
+Assembleia Geral, fortalecendo nossa missão.
+
+Aula de Espanhol: O poder da oralidade.
+
+💡 Um semestre intenso que reforçou nosso compromisso com a formação acadêmica e a vivência em equipe.">
+                <img src="images/galeria08.jpg" alt="Aula Prática" class="foto-thumbnail">
+                <div class="foto-overlay">
+                    <span class="comments-count">Semestre 2025.1</span>
+                </div>
+            </div>
+            
+            <div class="foto-item" data-id="3" data-title="Reforço/Repasso" data-description="📚✨ Nossas aulas de repaso e reforço têm sido momentos especiais de aprendizado colaborativo!
+Um espaço pensado para revisar conteúdos importantes, esclarecer dúvidas e fortalecer a base acadêmica de cada estudante.
+🤝 Com metodologia dinâmica e troca de experiências, buscamos apoiar a formação dos ligantes e incentivar o crescimento coletivo.
+
+💡 Mais do que revisar, é construir conhecimento juntos!">
+                <img src="images/galeria 04.jpg" alt="Congressos" class="foto-thumbnail">
+                <div class="foto-overlay">
+                    <span class="comments-count">Reforço/Repasso</span>
+                </div>
+            </div>
+
+            <div class="foto-item" data-id="3" data-title="Aula de Espanhol" data-description="📚✨ As primeiras aulas de Espanhol foram um verdadeiro sucesso!
+Com uma proposta dinâmica e interativa, trabalhamos comunicação prática, cultura e expressão oral, garantindo aos participantes uma experiência de aprendizado envolvente e transformadora. 🗣️🔥
+
+💡 Seguimos firmes no compromisso de tornar o estudo do espanhol acessível, leve e eficaz para todos!">
+                <img src="images/claseespanhol.jpg" alt="Congressos" class="foto-thumbnail">
+                <div class="foto-overlay">
+                    <span class="comments-count">Aula de Espanhol</span>
+                </div>
+            </div>
+
+            <div class="foto-item" data-id="3" data-title="Curso de Sutura" data-description="🪡✨ O Curso de Sutura, realizado em parceria com a Medicine Academy, foi uma experiência incrível e altamente proveitosa para todos os participantes.
+Entre teoria e prática, os estudantes puderam desenvolver habilidades essenciais, vivenciando de forma direta técnicas fundamentais para a formação médica. 👩‍⚕️👨‍⚕️
+
+🤝 Nosso agradecimento especial ao Dr. Rodrigo, pela dedicação e excelente condução das atividades, e à Medicine Academy pela parceria que tornou este momento ainda mais enriquecedor!">
+                <img src="images/galeria 03.jpg" alt="Congressos" class="foto-thumbnail">
+                <div class="foto-overlay">
+                    <span class="comments-count">Curso de Sutura</span>
+                </div>
+            </div>
+
+            <div class="foto-item" data-id="3" data-title="Assembleias" data-description="As assembleias acontecem a cada semestre e são momentos de integração, planejamento e avaliação das atividades da Liga. Também representam a ocasião especial de boas-vindas aos novos ligantes, fortalecendo o espírito de união e participação.">
+                <img src="images/galeria 01 (2).jpg" alt="Congressos" class="foto-thumbnail">
+                <div class="foto-overlay">
+                    <span class="comments-count">Assembleias</span>
+                </div>
+            </div>
+
+            
+            
+            <!-- Adicione mais fotos conforme necessário -->
+        </div>
+    </div>
+</section>
+
+<!-- Modal para visualizar foto e comentários -->
+<div id="galeriaModal" class="modal-galeria">
+    <div class="modal-galeria-content">
+        <span class="close-galeria">&times;</span>
+        <div class="modal-galeria-body">
+            <div class="foto-section">
+                <img id="modalFoto" src="" alt="" class="modal-image">
+                <div class="foto-info">
+                    <h3 id="fotoTitle"></h3>
+                    <p id="fotoDescription"></p>
+                </div>
+            </div>
+            <div class="comentarios-section">
+                
+                <div id="comentariosList" class="comentarios-lista"></div>
+                <form id="comentarioForm" class="comentario-form">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+            <!-- 📍 BUSCAR: "galeria 01.jpg" até "galeria 06.jpg" -->
 
             <div style="text-align: center; background: var(--light-gray); padding: var(--spacing-xl); border-radius: var(--border-radius-xl);">
                 <p style="font-size: var(--font-size-lg); color: var(--text-light); margin-bottom: var(--spacing-md);">
@@ -1949,6 +2295,185 @@
                 });
             });
         });
+        // Sistema de Galeria com Comentários
+class GaleriaLAMEDI {
+    constructor() {
+        this.modal = document.getElementById('galeriaModal');
+        this.modalImage = document.getElementById('modalFoto');
+        this.fotoTitle = document.getElementById('fotoTitle');
+        this.fotoDescription = document.getElementById('fotoDescription');
+        this.comentariosList = document.getElementById('comentariosList');
+        this.comentarioForm = document.getElementById('comentarioForm');
+        this.currentFotoId = null;
+        
+        this.initGaleriaListeners();
+        this.loadComentariosCount();
+    }
+    
+    initGaleriaListeners() {
+        // Abrir modal ao clicar nas fotos
+        document.querySelectorAll('.foto-item').forEach(item => {
+            item.addEventListener('click', (e) => {
+                const fotoId = item.dataset.id;
+                const title = item.dataset.title;
+                const description = item.dataset.description;
+                const imageSrc = item.querySelector('img').src;
+                
+                this.openGaleriaModal(fotoId, imageSrc, title, description);
+            });
+        });
+        
+        // Fechar modal
+        document.querySelector('.close-galeria').addEventListener('click', () => {
+            this.closeGaleriaModal();
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === this.modal) {
+                this.closeGaleriaModal();
+            }
+        });
+        
+        // Enviar comentário
+        this.comentarioForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.addComentario();
+        });
+        
+        // Esc para fechar
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.modal.style.display === 'block') {
+                this.closeGaleriaModal();
+            }
+        });
+    }
+    
+    openGaleriaModal(fotoId, imageSrc, title, description) {
+        this.currentFotoId = fotoId;
+        this.modalImage.src = imageSrc;
+        this.fotoTitle.textContent = title;
+        this.fotoDescription.textContent = description;
+        
+        this.loadComentarios(fotoId);
+        this.modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    closeGaleriaModal() {
+        this.modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    addComentario() {
+        const nomeUsuario = document.getElementById('nomeUsuario').value.trim();
+        const textoComentario = document.getElementById('textoComentario').value.trim();
+        
+        if (!nomeUsuario || !textoComentario) {
+            alert('Por favor, preencha seu nome e comentário!');
+            return;
+        }
+        
+        const comentario = {
+            id: Date.now(),
+            fotoId: this.currentFotoId,
+            autor: nomeUsuario,
+            texto: textoComentario,
+            timestamp: new Date().toISOString()
+        };
+        
+        this.saveComentario(comentario);
+        this.displayComentario(comentario);
+        this.updateComentarioCount(this.currentFotoId);
+        
+        // Limpar formulário
+        document.getElementById('nomeUsuario').value = '';
+        document.getElementById('textoComentario').value = '';
+        
+        // Scroll para ver o novo comentário
+        this.comentariosList.scrollTop = this.comentariosList.scrollHeight;
+    }
+    
+    saveComentario(comentario) {
+        let comentarios = JSON.parse(localStorage.getItem('lamedi_galeria_comentarios') || '[]');
+        comentarios.push(comentario);
+        localStorage.setItem('lamedi_galeria_comentarios', JSON.stringify(comentarios));
+    }
+    
+    loadComentariosCount() {
+        const comentarios = JSON.parse(localStorage.getItem('lamedi_galeria_comentarios') || '[]');
+        const comentarioCounts = {};
+        
+        comentarios.forEach(comentario => {
+            comentarioCounts[comentario.fotoId] = (comentarioCounts[comentario.fotoId] || 0) + 1;
+        });
+        
+        Object.keys(comentarioCounts).forEach(fotoId => {
+            this.updateComentarioCount(fotoId, comentarioCounts[fotoId]);
+        });
+    }
+    
+    loadComentarios(fotoId) {
+        const comentarios = JSON.parse(localStorage.getItem('lamedi_galeria_comentarios') || '[]');
+        const fotoComentarios = comentarios.filter(comentario => comentario.fotoId === fotoId);
+        
+        this.comentariosList.innerHTML = '';
+        
+        if (fotoComentarios.length === 0) {
+            this.comentariosList.innerHTML = '<p style="text-align: center; color: #95a5a6; font-style: italic;"></p>';
+        } else {
+            fotoComentarios.forEach(comentario => {
+                this.displayComentario(comentario);
+            });
+        }
+    }
+    
+    displayComentario(comentario) {
+        const comentarioElement = document.createElement('div');
+        comentarioElement.className = 'comentario';
+        
+        const timeAgo = this.getTimeAgo(new Date(comentario.timestamp));
+        
+        comentarioElement.innerHTML = `
+            <div class="comentario-autor">${comentario.autor}</div>
+            <div class="comentario-texto">${comentario.texto}</div>
+            <div class="comentario-tempo">${timeAgo}</div>
+        `;
+        
+        this.comentariosList.appendChild(comentarioElement);
+    }
+    
+    updateComentarioCount(fotoId, count = null) {
+        const fotoItem = document.querySelector(`[data-id="${fotoId}"]`);
+        if (!fotoItem) return;
+        
+        if (count === null) {
+            const comentarios = JSON.parse(localStorage.getItem('lamedi_galeria_comentarios') || '[]');
+            count = comentarios.filter(comentario => comentario.fotoId === fotoId).length;
+        }
+        
+        const countElement = fotoItem.querySelector('.comments-count');
+        countElement.textContent = `${count} comentário${count !== 1 ? 's' : ''}`;
+    }
+    
+    getTimeAgo(date) {
+        const now = new Date();
+        const diffInSeconds = Math.floor((now - date) / 1000);
+        
+        if (diffInSeconds < 60) return 'Agora mesmo';
+        if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} min atrás`;
+        if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} h atrás`;
+        if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)} d atrás`;
+        return new Date(date).toLocaleDateString('pt-BR');
+    }
+}
+
+// Inicializar galeria quando a página carregar
+document.addEventListener('DOMContentLoaded', () => {
+    if (document.getElementById('galeriaModal')) {
+        new GaleriaLAMEDI();
+    }
+});
+
     </script>
 </body>
 </html>
